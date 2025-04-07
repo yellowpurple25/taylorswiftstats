@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taylor Swift Stats</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/poppins/5.0.1/poppins.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #9b59b6;
+        --secondary-color: #ff6b6b;
+        --accent-color: #5fbff3;
+        --text-color: #2d3436;
+        --light-bg: #f7f9fc;
+        --dark-bg: #2d3436;
+        --card-bg: #ffffff;
+        --header-gradient: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+        --footer-gradient: linear-gradient(135deg, #fbc2eb 0%, #a18cd1 100%);
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        --hover-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        --border-radius: 16px;
+        --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Poppins', sans-serif;
+        background-color: var(--light-bg);
+        color: var(--text-color);
+        line-height: 1.6;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--light-bg);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--primary-color);
+        border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--secondary-color);
+      }
+
+      /* Navigation */
+      .navbar {
+        background-color: rgba(255, 255, 255, 0.95);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        padding: 0.8rem 0;
+        backdrop-filter: blur(8px);
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+      }
+
+      .logo img {
+        height: 50px;
+        margin-right: 15px;
+        border-radius: 50%;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        transition: var(--transition);
+      }
+
+      .logo h2 {
+        color: var(--primary-color);
+        font-size: 1.8rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+      }
+
+      .nav-links li {
+        margin: 0 20px;
+      }
+
+      .nav-links a {
+        color: var(--text-color);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.1rem;
+        transition: var(--transition);
+        position: relative;
+        padding-bottom: 5px;
+      }
+
+      .nav-links a:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: var(--secondary-color);
+        transition: var(--transition);
+      }
+
+      .nav-links a:hover {
+        color: var(--secondary-color);
+      }
+
+      .nav-links a:hover:after {
+        width: 100%;
+      }
+
+      .toggle-btn {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--text-color);
+        cursor: pointer;
+      }
+
+      .hero {
+        background: var(--header-gradient);
+        padding: 120px 20px 60px;
+        text-align: center;
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('https://cdn.discordapp.com/attachments/1175557947003257004/1358008991384473641/image.png?ex=67f4eaee&is=67f3996e&hm=c6d3677aa5cfecc0e04602fc18c56ded17da98ebcb07b335902d5340319ede18&');
+        background-size: cover;
+        background-position: center;
+        opacity: 0.4;
+        z-index: 0;
+        animation: slow-zoom 30s infinite alternate;
+        filter: blur(5px) brightness(0.6);
+      }
+
+      @keyframes slow-zoom {
+        from {
+          transform: scale(1);
+        }
+        to {
+          transform: scale(1.1);
+        }
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .hero h1 {
+        font-size: 5rem;
+        font-weight: 800;
+        margin-bottom: 30px;
+        text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+        animation: fadeInDown 1.2s ease-out;
+        letter-spacing: 2px;
+      }
+
+      .hero p {
+        font-size: 1.8rem;
+        margin-bottom: 40px;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        animation: fadeIn 1.5s ease-out;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .cta-btn {
+        display: inline-block;
+        background-color: var(--accent-color);
+        color: white;
+        padding: 16px 36px;
+        border-radius: 50px;
+        font-size: 1.3rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: var(--transition);
+        box-shadow: var(--shadow);
+        animation: fadeInUp 1.8s ease-out;
+        border: 2px solid transparent;
+        letter-spacing: 1px;
+      }
+
+      .cta-btn:hover {
+        box-shadow: var(--hover-shadow);
+        background-color: white;
+        color: var(--accent-color);
+        border-color: var(--accent-color);
+      }
+
+      /* Stats Section */
+      .stats-section {
+        padding: 120px 20px;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 70px;
+      }
+
+      .section-header h2 {
+        font-size: 3rem;
+        color: var(--primary-color);
+        position: relative;
+        display: inline-block;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .section-header h2::after {
+        content: '';
+        position: absolute;
+        width: 60%;
+        height: 4px;
+        background-color: var(--secondary-color);
+        bottom: -12px;
+        left: 20%;
+        border-radius: 2px;
+      }
+
+      .section-header p {
+        font-size: 1.3rem;
+        color: var(--text-color);
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.8;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 35px;
+      }
+
+      .stat-card {
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius);
+        padding: 40px 30px;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        border-top: 5px solid transparent;
+      }
+
+      .stat-card::before {
+        content: '';
+        position: absolute;
+        top: -100px;
+        left: -100px;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background-color: rgba(155, 89, 182, 0.1);
+        transition: var(--transition);
+        z-index: 0;
+      }
+
+      .stat-card:hover {
+        box-shadow: var(--hover-shadow);
+        transform: translateY(-10px);
+        border-top-color: var(--secondary-color);
+      }
+
+      .stat-card:hover::before {
+        transform: scale(3);
+      }
+
+      .stat-card:nth-child(1):hover {
+        border-top-color: #ff0000;
+      }
+      .stat-card:nth-child(2):hover {
+        border-top-color: #000000;
+      }
+      .stat-card:nth-child(3):hover {
+        border-top-color: #1da1f2;
+      }
+      .stat-card:nth-child(4):hover {
+        border-top-color: #e1306c;
+      }
+      .stat-card:nth-child(5):hover {
+        border-top-color: #1db954;
+      }
+
+      .stat-icon {
+        font-size: 3rem;
+        color: var(--primary-color);
+        margin-bottom: 25px;
+        position: relative;
+        z-index: 1;
+        transition: var(--transition);
+      }
+
+      .stat-card:hover .stat-icon {
+        transform: scale(1.2);
+      }
+
+      .stat-card:nth-child(1) .stat-icon {
+        color: #ff0000;
+      }
+      .stat-card:nth-child(2) .stat-icon {
+        color: #000000;
+      }
+      .stat-card:nth-child(3) .stat-icon {
+        color: #1da1f2;
+      }
+      .stat-card:nth-child(4) .stat-icon {
+        color: #e1306c;
+      }
+      .stat-card:nth-child(5) .stat-icon {
+        color: #1db954;
+      }
+
+      .stat-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: var(--text-color);
+        position: relative;
+        z-index: 1;
+      }
+
+      .stat-number {
+        font-size: 2.8rem;
+        font-weight: 700;
+        color: var(--secondary-color);
+        margin-bottom: 10px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .stat-card:nth-child(1) .stat-number {
+        color: #ff0000;
+      }
+      .stat-card:nth-child(2) .stat-number {
+        color: #000000;
+      }
+      .stat-card:nth-child(3) .stat-number {
+        color: #1da1f2;
+      }
+      .stat-card:nth-child(4) .stat-number {
+        color: #e1306c;
+      }
+      .stat-card:nth-child(5) .stat-number {
+        color: #1db954;
+      }
+
+      .stat-info {
+        font-size: 1.1rem;
+        color: var(--text-color);
+        position: relative;
+        z-index: 1;
+        margin-bottom: 8px;
+        opacity: 0.9;
+      }
+
+      .stat-link {
+        display: inline-block;
+        margin-top: 20px;
+        color: var(--primary-color);
+        font-weight: 600;
+        text-decoration: none;
+        position: relative;
+        z-index: 1;
+        transition: var(--transition);
+      }
+
+      .stat-link:hover {
+        color: var(--secondary-color);
+      }
+
+      /* Footer Section */
+      .footer {
+        background: var(--footer-gradient);
+        color: white;
+        padding: 60px 20px 40px;
+        text-align: center;
+        position: relative;
+      }
+
+      .footer p {
+        margin: 20px 0;
+        font-size: 1.1rem;
+      }
+
+      .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 30px;
+      }
+
+      .social-icons a {
+        color: white;
+        font-size: 1.5rem;
+        transition: var(--transition);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .social-icons a:hover {
+        transform: translateY(-5px);
+        background: white;
+        color: var(--primary-color);
+      }
+
+      /* Back to top button */
+      .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-size: 1.2rem;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+        opacity: 0;
+        pointer-events: none;
+        z-index: 99;
+      }
+
+      .back-to-top.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .back-to-top:hover {
+        background-color: var(--secondary-color);
+        transform: translateY(-5px);
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Media Queries */
+      @media (max-width: 992px) {
+        .hero h1 {
+          font-size: 4rem;
+        }
+        .section-header h2 {
+          font-size: 2.5rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .navbar {
+          padding: 0.6rem 0;
+        }
+        .nav-links {
+          position: fixed;
+          top: 80px;
+          left: 0;
+          background-color: rgba(255, 255, 255, 0.95);
+          width: 100%;
+          flex-direction: column;
+          align-items: center;
+          padding: 20px 0;
+          clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+          transition: 0.5s ease-in-out;
+        }
+        .nav-links.active {
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+          box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        .nav-links li {
+          margin: 15px 0;
+        }
+        .toggle-btn {
+          display: block;
+        }
+        .hero h1 {
+          font-size: 3rem;
+        }
+        .hero p {
+          font-size: 1.4rem;
+        }
+        .stats-grid {
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+        .cta-btn {
+          padding: 12px 30px;
+          font-size: 1.1rem;
+        }
+        .section-header h2 {
+          font-size: 2rem;
+        }
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .reveal {
+        position: relative;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: 1s all ease;
+      }
+
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="logo">
+          <img
+            src="https://i.pinimg.com/736x/a7/11/b3/a711b3443795748f0406271ffc23ee0c.jpg"
+            alt="Taylor Swift Logo"
+          />
+          <h2>TS Stats</h2>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#stats">Stats</a></li>
+        </ul>
+        <button class="toggle-btn" id="toggle-btn">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <h1>Taylor Swift Stats</h1>
+        <a href="#stats" class="cta-btn">Explore Stats</a>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section" id="stats">
+      <div class="section-header reveal">
+        <h2>Platform Stats</h2>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card reveal">
+          <div class="stat-icon">
+            <i class="fab fa-youtube"></i>
+          </div>
+          <h3 class="stat-title">YouTube</h3>
+          <p class="stat-number">60M+</p>
+          <p class="stat-info">Subscribers</p>
+          <p class="stat-info">350+ Videos</p>
+          <p class="stat-info">10B+ Views</p>
+          <a href="#" class="stat-link">More YouTube Stats</a>
+        </div>
+        <div class="stat-card reveal">
+          <div class="stat-icon">
+            <i class="fab fa-tiktok"></i>
+          </div>
+          <h3 class="stat-title">TikTok</h3>
+          <p class="stat-number">40M+</p>
+          <p class="stat-info">Followers</p>
+          <p class="stat-info">300+ Videos</p>
+          <p class="stat-info">500M+ Likes</p>
+          <a href="#" class="stat-link">More TikTok Stats</a>
+        </div>
+        <div class="stat-card reveal">
+          <div class="stat-icon">
+            <i class="fab fa-twitter"></i>
+          </div>
+          <h3 class="stat-title">Twitter</h3>
+          <p class="stat-number">90M+</p>
+          <p class="stat-info">Followers</p>
+          <p class="stat-info">5K+ Tweets</p>
+          <p class="stat-info">1B+ Likes</p>
+          <a href="#" class="stat-link">More Twitter Stats</a>
+        </div>
+        <div class="stat-card reveal">
+          <div class="stat-icon">
+            <i class="fab fa-instagram"></i>
+          </div>
+          <h3 class="stat-title">Instagram</h3>
+          <p class="stat-number">150M+</p>
+          <p class="stat-info">Followers</p>
+          <p class="stat-info">1K+ Posts</p>
+          <p class="stat-info">10B+ Likes</p>
+          <a href="#" class="stat-link">More Instagram Stats</a>
+        </div>
+        <div class="stat-card reveal">
+          <div class="stat-icon">
+            <i class="fab fa-spotify"></i>
+          </div>
+          <h3 class="stat-title">Spotify</h3>
+          <p class="stat-number">85M+</p>
+          <p class="stat-info">Monthly Listeners</p>
+          <p class="stat-info">250+ Songs</p>
+          <p class="stat-info">50B+ Streams</p>
+          <a href="#" class="stat-link">More Spotify Stats</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+      <h3>follow taylor!</h3>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-tiktok"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-spotify"></i></a>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#home" class="back-to-top" id="backToTop">
+      <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+      // Mobile menu toggle
+      document
+        .getElementById('toggle-btn')
+        .addEventListener('click', function () {
+          document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+      // Back to top button visibility
+      window.addEventListener('scroll', function () {
+        const backToTopButton = document.getElementById('backToTop');
+        if (window.scrollY > 300) {
+          backToTopButton.classList.add('active');
+        } else {
+          backToTopButton.classList.remove('active');
+        }
+      });
+
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth',
+          });
+
+          // Close mobile menu if open
+          document.querySelector('.nav-links').classList.remove('active');
+        });
+      });
+
+      // Reveal animations on scroll
+      window.addEventListener('scroll', function () {
+        const reveals = document.querySelectorAll('.reveal');
+
+        reveals.forEach(reveal => {
+          const windowHeight = window.innerHeight;
+          const revealTop = reveal.getBoundingClientRect().top;
+          const revealPoint = 150;
+
+          if (revealTop < windowHeight - revealPoint) {
+            reveal.classList.add('active');
+          }
+        });
+      });
+
+      // Trigger initial reveal check
+      window.dispatchEvent(new Event('scroll'));
+    </script>
+  </body>
+</html>
